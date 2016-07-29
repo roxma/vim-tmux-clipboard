@@ -18,6 +18,10 @@ endfunction
 
 function! s:Enable()
 
+	if has('nvim')==0
+		return
+	endif
+
 	if s:InTmuxSession()==0
 		return
 	endif
