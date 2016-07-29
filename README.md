@@ -1,9 +1,16 @@
 
 # vim-tmux-clipboard
 
-This plugin provides seemless integration for vim and tmux's clipboard.
-Automatically copy yanked text into tmux's clipboard, and copy tmux's clipboard
-content into vim's quote(`"`) register, known as unnamed register.
+Things get nasty when I need to copy lines of text from vim to tmux's
+clipboard, especially when multiple split-windows are opened. So I created this
+plugin, which provides seemless integration for vim and tmux's clipboard.
+
+
+vim-tmux-clipboard Automatically copy yanked text into tmux's clipboard, and
+copy tmux's clipboard content into vim's quote(`"`) register, known as unnamed
+register. It also make multiple vim processes on top of the same tmux session
+act like they're sharing the same clipboard.
+
 
 ## Requirements
 
