@@ -31,8 +31,8 @@ function! s:Enable()
 	" @"
 	augroup vimtmuxclipboard
 		autocmd!
-		autocmd FocusGained * let g:vimtmuxclipboard_LastBufferName = s:TmuxBufferName()
-		autocmd	FocusLost   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
+		autocmd FocusLost * let g:vimtmuxclipboard_LastBufferName = s:TmuxBufferName()
+		autocmd	FocusGained   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
 		autocmd TextYankPost * call s:YankPost()
 	augroup END
 
