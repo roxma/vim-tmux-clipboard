@@ -1,7 +1,7 @@
 
 # vim-tmux-clipboard
 
-Things get nasty when I need to copy lines of text from vim to tmux's
+Things get nasty when I need to copy lines of text from vim into tmux's
 clipboard, especially when multiple split-windows are opened. So I created this
 super simple plugin, which provides seemless integration for vim and tmux's
 clipboard.
