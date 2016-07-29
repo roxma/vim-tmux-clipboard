@@ -7,7 +7,7 @@ super simple plugin, which provides seemless integration for vim and tmux's
 clipboard.
 
 
-vim-tmux-clipboard Automatically copy yanked text into tmux's clipboard, and
+vim-tmux-clipboard automatically copy yanked text into tmux's clipboard, and
 copy tmux's clipboard content into vim's quote(`"`) register, known as unnamed
 register. It also make multiple vim processes on top of the same tmux session
 act like they're sharing the same clipboard.
