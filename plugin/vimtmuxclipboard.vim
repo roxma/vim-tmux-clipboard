@@ -18,23 +18,29 @@ endfunction
 
 function! s:Enable()
 
-	if has('nvim')==0
-		return
-	endif
-
 	if s:InTmuxSession()==0
 		return
 	endif
 
 	let g:vimtmuxclipboard_LastBufferName=""
 
-	" @"
-	augroup vimtmuxclipboard
-		autocmd!
-		autocmd FocusLost * let g:vimtmuxclipboard_LastBufferName = s:TmuxBufferName()
-		autocmd	FocusGained   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
-		autocmd TextYankPost * call s:YankPost()
-	augroup END
+	if has('nvim')==1
+		" @"
+		augroup vimtmuxclipboard
+			autocmd!
+			autocmd FocusLost * let g:vimtmuxclipboard_LastBufferName = s:TmuxBufferName()
+			autocmd	FocusGained   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
+			autocmd TextYankPost * call s:YankPost()
+		augroup END
+	else
+		" vim doesn't support TextYankPost event
+		" This is a workaround for vim
+		augroup vimtmuxclipboard
+			autocmd!
+			autocmd FocusLost     *  silent! call system('tmux loadb -',@")
+			autocmd	FocusGained   *  let @" = s:TmuxBuffer()
+		augroup END
+	endif
 
 endfunction
 

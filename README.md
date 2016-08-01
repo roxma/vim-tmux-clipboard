@@ -15,8 +15,8 @@ act like they're sharing the same clipboard.
 
 ## Requirements
 
-- [neovim](https://github.com/neovim/neovim). This is due to vim dosen't
-    support the `TextYankPost` event.
+- ~~[neovim](https://github.com/neovim/neovim). This is due to vim dosen't
+    support the `TextYankPost` event. ~~
 - [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
 
 
