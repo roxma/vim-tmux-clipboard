@@ -20,7 +20,7 @@ act like they're sharing the same clipboard.
 - [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
 
 
-## Screen Shots
+## Demo
 
 [![asciicast](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig.png)](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig)
 
