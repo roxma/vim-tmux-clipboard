@@ -32,6 +32,7 @@ function! s:Enable()
 			autocmd	FocusGained   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
 			autocmd TextYankPost * call s:YankPost()
 		augroup END
+		let @" = s:TmuxBuffer()
 	else
 		" vim doesn't support TextYankPost event
 		" This is a workaround for vim
@@ -40,6 +41,7 @@ function! s:Enable()
 			autocmd FocusLost     *  silent! call system('tmux loadb -',@")
 			autocmd	FocusGained   *  let @" = s:TmuxBuffer()
 		augroup END
+		let @" = s:TmuxBuffer()
 	endif
 
 endfunction
