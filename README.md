@@ -22,5 +22,5 @@ act like they're sharing the same clipboard.
 
 ## Screen Shots
 
-[demo](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig)
+[![asciicast](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig.png)](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig)
 
