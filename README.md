@@ -19,3 +19,8 @@ act like they're sharing the same clipboard.
     support the `TextYankPost` event.
 - [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
 
+
+## Screen Shots
+
+[demo](https://asciinema.org/a/at9jjmpvw4qr84hrsch4vi6ig)
+
