@@ -1,8 +1,4 @@
 
-function! s:InTmuxSession()
-	return $TMUX != ''
-endfunction
-
 function! s:TmuxBufferName()
 	let l:list = systemlist('tmux list-buffers -F"#{buffer_name}"')
 	if len(l:list)==0
@@ -18,19 +14,20 @@ endfunction
 
 function! s:Enable()
 
-	if s:InTmuxSession()==0
+	if $TMUX=='' 
+		" not in tmux session
 		return
 	endif
 
-	let g:vimtmuxclipboard_LastBufferName=""
+	let s:lastbname=""
 
 	if has('nvim')==1
 		" @"
 		augroup vimtmuxclipboard
 			autocmd!
-			autocmd FocusLost * let g:vimtmuxclipboard_LastBufferName = s:TmuxBufferName()
-			autocmd	FocusGained   * if g:vimtmuxclipboard_LastBufferName!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
-			autocmd TextYankPost * call s:YankPost()
+			autocmd FocusLost * let s:lastbname=s:TmuxBufferName()
+			autocmd	FocusGained   * if s:lastbname!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
+			autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
 		augroup END
 		let @" = s:TmuxBuffer()
 	else
@@ -46,10 +43,8 @@ function! s:Enable()
 
 endfunction
 
-function! s:YankPost()
-	let l:s=join(v:event["regcontents"],"\n") 
-	" let l:s=shellescape(l:s)
-	" "if len(l:s)<4096
+call s:Enable()
+
 	" " workaround for this bug
 	" if shellescape("\n")=="'\\\n'"
 	" 	let l:s=substitute(l:s,'\\\n',"\n","g")
@@ -57,8 +52,5 @@ function! s:YankPost()
 	" 	");
 	" 	let g:tmp_cmd='tmux set-buffer ' . l:s
 	" endif
-	silent! call system('tmux loadb -',l:s)
-	"endif
-endfunction
+	" silent! call system('tmux loadb -',l:s)
 
-call s:Enable()
