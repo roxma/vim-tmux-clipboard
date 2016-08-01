@@ -40,13 +40,16 @@ endfunction
 
 function! s:YankPost()
 	let l:s=join(v:event["regcontents"],"\n") 
-	let l:s=shellescape(l:s)
-	"if len(l:s)<4096
-	" workaround for this bug
-	if shellescape("\n")=="'\\\n'"
-		let l:s=substitute(l:s,'\\\n',"\n","g")
-	endif
-	silent! call system('tmux set-buffer ' . l:s)
+	" let l:s=shellescape(l:s)
+	" "if len(l:s)<4096
+	" " workaround for this bug
+	" if shellescape("\n")=="'\\\n'"
+	" 	let l:s=substitute(l:s,'\\\n',"\n","g")
+	" 	let g:tmp_s=substitute(l:s,'\\\n',"\n","g")
+	" 	");
+	" 	let g:tmp_cmd='tmux set-buffer ' . l:s
+	" endif
+	silent! call system('tmux loadb -',l:s)
 	"endif
 endfunction
 
