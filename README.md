@@ -15,7 +15,8 @@ act like they're sharing the same clipboard.
 
 ## Requirements
 
-- [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
+- add `set -g focus-events on` to your `tmux.conf`.
+- [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events) for vim users.
 - [neovim](https://github.com/neovim/neovim) is recommended. Because vim does
     not support `TextYankPost` event, which is required for `It also makes
     multiple vim processes on top of the same tmux session act like they're
