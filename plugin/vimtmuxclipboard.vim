@@ -21,7 +21,8 @@ function! s:Enable()
 
 	let s:lastbname=""
 
-	if has('nvim')==1
+	" if support TextYankPost
+	if exists('##TextYankPost')==1
 		" @"
 		augroup vimtmuxclipboard
 			autocmd!
