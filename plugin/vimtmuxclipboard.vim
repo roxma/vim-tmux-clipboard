@@ -20,15 +20,24 @@ function! s:Enable()
   endif
 
   let s:lastbname=""
+  let s:prevbname=""
 
   " if support TextYankPost
   if exists('##TextYankPost')==1
     " @"
     augroup vimtmuxclipboard
       autocmd!
-      autocmd FocusLost * let s:lastbname=s:TmuxBufferName()
-      autocmd FocusGained * if s:lastbname!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
-      autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
+      autocmd FocusLost    *
+        \ let s:prevbname = s:lastbname |
+        \ let s:lastbname = s:TmuxBufferName()
+      autocmd FocusGained  *
+        \ if s:lastbname != s:TmuxBufferName() || s:lastbname != s:prevbname |
+        \   let @" = s:TmuxBuffer() |
+        \ endif
+      autocmd TextYankPost *
+        \ silent! call system('tmux loadb -',join(v:event["regcontents"],"\n")) |
+        \ let s:lastbname = s:TmuxBufferName() |
+        \ let s:prevbname = s:lastbname |
     augroup END
     let @" = s:TmuxBuffer()
   else
