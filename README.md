@@ -17,10 +17,10 @@ act like they're sharing the same clipboard.
 
 - add `set -g focus-events on` to your `tmux.conf`.
 - [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events) for vim users.
-- [neovim](https://github.com/neovim/neovim) used to be recommended. Because vim did
-    not support `TextYankPost` event before version 8.0.1394, which is required for `It also makes
-    multiple vim processes on top of the same tmux session act like they're
-    sharing the same clipboard`.
+- [neovim](https://github.com/neovim/neovim) or vim above 8.0.1394 is
+  recommended for `TextYankPost` event, which is required for `It also makes
+  multiple vim processes on top of the same tmux session act like they're
+  sharing the same clipboard`.
 
 
 ## Demo
