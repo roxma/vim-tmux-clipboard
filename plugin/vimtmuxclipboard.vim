@@ -26,8 +26,8 @@ func! s:Enable()
         " @"
         augroup vimtmuxclipboard
             autocmd!
-            autocmd FocusLost * let s:lastbname=s:TmuxBufferName()
-            autocmd	FocusGained   * if s:lastbname!=s:TmuxBufferName() | let @" = s:TmuxBuffer() | endif
+            autocmd FocusLost * call s:update_from_tmux()
+            autocmd	FocusGained   * call s:update_from_tmux()
             autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
         augroup END
         let @" = s:TmuxBuffer()
@@ -44,6 +44,13 @@ func! s:Enable()
 
 endfunc
 
+func! s:update_from_tmux()
+    let buffer_name = s:TmuxBufferName()
+    if s:lastbname != buffer_name
+        let @" = s:TmuxBuffer()
+    endif
+    let s:lastbname=s:TmuxBufferName()
+endfunc
 
 call s:Enable()
 
