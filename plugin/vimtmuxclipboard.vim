@@ -28,7 +28,7 @@ func! s:Enable()
             autocmd!
             autocmd FocusLost * call s:update_from_tmux()
             autocmd	FocusGained   * call s:update_from_tmux()
-            autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
+            autocmd TextYankPost * silent! call system('tmux loadb -',join("\n",v:event["regcontents"],"\n"))
         augroup END
         let @" = s:TmuxBuffer()
     else
