@@ -29,8 +29,8 @@ func! s:Enable()
             autocmd FocusLost * call s:update_from_tmux()
             autocmd	FocusGained   * call s:update_from_tmux()
             autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
+            autocmd BufReadPost * silent! let @" = s:TmuxBuffer()
         augroup END
-        let @" = s:TmuxBuffer()
     else
         " vim doesn't support TextYankPost event
         " This is a workaround for vim
@@ -38,8 +38,8 @@ func! s:Enable()
             autocmd!
             autocmd FocusLost     *  silent! call system('tmux loadb -',@")
             autocmd	FocusGained   *  let @" = s:TmuxBuffer()
+            autocmd BufReadPost * silent! let @" = s:TmuxBuffer()
         augroup END
-        let @" = s:TmuxBuffer()
     endif
 
 endfunc
