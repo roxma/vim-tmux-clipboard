@@ -8,6 +8,14 @@ func! s:TmuxBufferName()
     endif
 endfunc
 
+function! s:on_stdout(job_id, data, event)
+    let @" = join(a:data, "\n")
+endfunction
+
+func! s:AsyncTmuxBuffer()
+    call jobstart('tmux show-buffer', {'on_stdout': function('s:on_stdout'), 'stdout_buffered': 1})
+endfunc
+
 func! s:TmuxBuffer()
     return system('tmux show-buffer')
 endfunc
@@ -30,7 +38,11 @@ func! s:Enable()
             autocmd	FocusGained   * call s:update_from_tmux()
             autocmd TextYankPost * silent! call system('tmux loadb -',join(v:event["regcontents"],"\n"))
         augroup END
-        let @" = s:TmuxBuffer()
+        if exists('*jobstart')==1 " Only supported on Neovim
+            call s:AsyncTmuxBuffer()
+        else
+            let @" = s:TmuxBuffer()
+        endif
     else
         " vim doesn't support TextYankPost event
         " This is a workaround for vim
