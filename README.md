@@ -22,6 +22,9 @@ act like they're sharing the same clipboard.
   multiple vim processes on top of the same tmux session act like they're
   sharing the same clipboard`.
 
+## Options
+
+- `g:vim_tmux_clipboard#loadb_option` see [#20](https://github.com/roxma/vim-tmux-clipboard/pull/20)
 
 ## Demo
 
