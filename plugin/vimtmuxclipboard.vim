@@ -38,7 +38,7 @@ func! s:Enable()
             autocmd!
             autocmd FocusLost * call s:update_from_tmux()
             autocmd	FocusGained * call s:update_from_tmux()
-            autocmd TextYankPost * silent! call system('tmux loadb ' . g:vim_tmux_clipboard#loadb_option . ' -',join(v:event["regcontents"],"\n"))
+            autocmd TextYankPost * silent! call system('cat | tmux loadb ' . g:vim_tmux_clipboard#loadb_option . ' -',join(v:event["regcontents"],"\n"))
         augroup END
         if exists('*jobstart')==1 " Only supported on Neovim
             call s:AsyncTmuxBuffer()
@@ -50,7 +50,7 @@ func! s:Enable()
         " This is a workaround for vim
         augroup vimtmuxclipboard
             autocmd!
-            autocmd FocusLost     *  silent! call system('tmux loadb ' . g:vim_tmux_clipboard#loadb_option . ' -',@")
+            autocmd FocusLost     *  silent! call system('cat | tmux loadb ' . g:vim_tmux_clipboard#loadb_option . ' -',@")
             autocmd	FocusGained   *  let @" = s:TmuxBuffer()
         augroup END
         let @" = s:TmuxBuffer()
